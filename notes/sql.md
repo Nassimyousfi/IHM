@@ -96,3 +96,42 @@ Par défaut, réglé sur *user*, devra être changé ultérieurement par un admi
 Clé étrangère sur **proj_TypeUtilisateur.TypeUtilisateur**
 
 varchar 10
+
+## Spectacle
+
+Référence tous les spectacles proposés (faits, en cours, à venir)
+
+### idSpectacle
+
+Identifiant unique auto-incrémenté, **clé primaire**
+
+Int
+
+### nom
+
+Nom du spectacle
+
+varchar 50
+
+(unique ?)
+
+
+### type
+
+Référence le type de spectacle: concert, pièce de théatre, danse ...
+
+Suggestion: Les valeurs devraient venir d'une table externe
+
+varchar 30
+
+### infos
+
+contient les informations du spectacle:
+
+- nom du metteur en scène / chorégraphe
+- noms des acteurs/musiciens
+- description courte
+
+suggestion : peut être divisé en plusieurs champs dans un vrai site
+
+TEXT
