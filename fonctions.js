@@ -14,20 +14,3 @@ function initMap() {
 }
 
 google.maps.event.addDomListener(window, 'load', initMap); // Créé la carte lors du chargement de la page
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
