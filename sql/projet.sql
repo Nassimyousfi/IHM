@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Dim 28 Mai 2017 à 12:22
+-- Généré le :  Lun 29 Mai 2017 à 11:43
 -- Version du serveur :  10.1.19-MariaDB
 -- Version de PHP :  5.6.24
 
@@ -19,6 +19,95 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `projet`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `proj_Categorie`
+--
+
+CREATE TABLE `proj_Categorie` (
+  `idCategorie` int(11) NOT NULL,
+  `Categorie` varchar(20) COLLATE utf8_roman_ci NOT NULL,
+  `idSalle` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_roman_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `proj_Place`
+--
+
+CREATE TABLE `proj_Place` (
+  `idPlace` int(11) NOT NULL,
+  `idSalle` int(11) NOT NULL,
+  `Categorie` varchar(20) COLLATE utf8_roman_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_roman_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `proj_PrixPlace`
+--
+
+CREATE TABLE `proj_PrixPlace` (
+  `idCategorie` int(11) NOT NULL,
+  `idSpectacle` int(11) NOT NULL,
+  `Prix` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_roman_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `proj_Representation`
+--
+
+CREATE TABLE `proj_Representation` (
+  `idRepresentation` int(11) NOT NULL,
+  `idSalle` int(11) NOT NULL,
+  `idSpectacle` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `horaireDebut` time NOT NULL,
+  `horaireFin` time NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_roman_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `proj_Reservation`
+--
+
+CREATE TABLE `proj_Reservation` (
+  `idUtilisateur` int(11) NOT NULL,
+  `idRepresentation` int(11) NOT NULL,
+  `idPlace` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_roman_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `proj_Salle`
+--
+
+CREATE TABLE `proj_Salle` (
+  `idSalle` int(11) NOT NULL,
+  `nom` varchar(30) COLLATE utf8_roman_ci NOT NULL,
+  `adresse` text COLLATE utf8_roman_ci NOT NULL,
+  `type` varchar(20) COLLATE utf8_roman_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_roman_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `proj_Spectacle`
+--
+
+CREATE TABLE `proj_Spectacle` (
+  `idSpectacle` int(11) NOT NULL,
+  `nom` varchar(50) COLLATE utf8_roman_ci NOT NULL,
+  `type` varchar(30) COLLATE utf8_roman_ci NOT NULL,
+  `infos` text COLLATE utf8_roman_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_roman_ci;
 
 -- --------------------------------------------------------
 
@@ -59,22 +148,51 @@ CREATE TABLE `proj_Utilisateur` (
   `typeUtilisateur` varchar(10) COLLATE utf8_roman_ci NOT NULL DEFAULT 'user'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_roman_ci;
 
--- --------------------------------------------------------
-
---
--- Structure de la table `Spectacle`
---
-
-CREATE TABLE `Spectacle` (
-  `idSpectacle` int(11) NOT NULL,
-  `nom` varchar(50) COLLATE utf8_roman_ci NOT NULL,
-  `type` varchar(30) COLLATE utf8_roman_ci NOT NULL,
-  `infos` text COLLATE utf8_roman_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_roman_ci;
-
 --
 -- Index pour les tables exportées
 --
+
+--
+-- Index pour la table `proj_Categorie`
+--
+ALTER TABLE `proj_Categorie`
+  ADD PRIMARY KEY (`idCategorie`);
+
+--
+-- Index pour la table `proj_Place`
+--
+ALTER TABLE `proj_Place`
+  ADD PRIMARY KEY (`idPlace`);
+
+--
+-- Index pour la table `proj_PrixPlace`
+--
+ALTER TABLE `proj_PrixPlace`
+  ADD PRIMARY KEY (`idCategorie`,`idSpectacle`);
+
+--
+-- Index pour la table `proj_Representation`
+--
+ALTER TABLE `proj_Representation`
+  ADD PRIMARY KEY (`idRepresentation`);
+
+--
+-- Index pour la table `proj_Reservation`
+--
+ALTER TABLE `proj_Reservation`
+  ADD PRIMARY KEY (`idPlace`,`idRepresentation`,`idUtilisateur`);
+
+--
+-- Index pour la table `proj_Salle`
+--
+ALTER TABLE `proj_Salle`
+  ADD PRIMARY KEY (`idSalle`);
+
+--
+-- Index pour la table `proj_Spectacle`
+--
+ALTER TABLE `proj_Spectacle`
+  ADD PRIMARY KEY (`idSpectacle`);
 
 --
 -- Index pour la table `proj_Types_Utilisateur`
@@ -91,25 +209,39 @@ ALTER TABLE `proj_Utilisateur`
   ADD UNIQUE KEY `login` (`login`);
 
 --
--- Index pour la table `Spectacle`
---
-ALTER TABLE `Spectacle`
-  ADD PRIMARY KEY (`idSpectacle`);
-
---
 -- AUTO_INCREMENT pour les tables exportées
 --
 
+--
+-- AUTO_INCREMENT pour la table `proj_Categorie`
+--
+ALTER TABLE `proj_Categorie`
+  MODIFY `idCategorie` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `proj_Place`
+--
+ALTER TABLE `proj_Place`
+  MODIFY `idPlace` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `proj_Representation`
+--
+ALTER TABLE `proj_Representation`
+  MODIFY `idRepresentation` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `proj_Salle`
+--
+ALTER TABLE `proj_Salle`
+  MODIFY `idSalle` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `proj_Spectacle`
+--
+ALTER TABLE `proj_Spectacle`
+  MODIFY `idSpectacle` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `proj_Utilisateur`
 --
 ALTER TABLE `proj_Utilisateur`
   MODIFY `idUtilisateur` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `Spectacle`
---
-ALTER TABLE `Spectacle`
-  MODIFY `idSpectacle` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
