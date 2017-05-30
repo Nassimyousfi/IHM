@@ -15,7 +15,13 @@ choisir sa place. L'interface doit être concue avec l'accessibilité en tête.
 2. concevoir le site permettant l'exploitation de cette base
 3. rendre le site accessible aux personnes en situation de handicap
 
-## Intervenants:
+
+## Enseignants:
+
+1. Isis Truck
+2. Dominique Archambault
+
+## Elèves:
 
 1. Bilo
 2. Charles
