@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Lun 29 Mai 2017 à 11:43
+-- Généré le :  Mar 30 Mai 2017 à 17:22
 -- Version du serveur :  10.1.19-MariaDB
 -- Version de PHP :  5.6.24
 
@@ -156,31 +156,40 @@ CREATE TABLE `proj_Utilisateur` (
 -- Index pour la table `proj_Categorie`
 --
 ALTER TABLE `proj_Categorie`
-  ADD PRIMARY KEY (`idCategorie`);
+  ADD PRIMARY KEY (`idCategorie`),
+  ADD KEY `idSalle` (`idSalle`),
+  ADD KEY `Categorie` (`Categorie`);
 
 --
 -- Index pour la table `proj_Place`
 --
 ALTER TABLE `proj_Place`
-  ADD PRIMARY KEY (`idPlace`);
+  ADD PRIMARY KEY (`idPlace`),
+  ADD KEY `idSalle` (`idSalle`),
+  ADD KEY `Categorie` (`Categorie`);
 
 --
 -- Index pour la table `proj_PrixPlace`
 --
 ALTER TABLE `proj_PrixPlace`
-  ADD PRIMARY KEY (`idCategorie`,`idSpectacle`);
+  ADD PRIMARY KEY (`idCategorie`,`idSpectacle`),
+  ADD KEY `idSpectacle` (`idSpectacle`);
 
 --
 -- Index pour la table `proj_Representation`
 --
 ALTER TABLE `proj_Representation`
-  ADD PRIMARY KEY (`idRepresentation`);
+  ADD PRIMARY KEY (`idRepresentation`),
+  ADD KEY `idSalle` (`idSalle`),
+  ADD KEY `idSpectacle` (`idSpectacle`);
 
 --
 -- Index pour la table `proj_Reservation`
 --
 ALTER TABLE `proj_Reservation`
-  ADD PRIMARY KEY (`idPlace`,`idRepresentation`,`idUtilisateur`);
+  ADD PRIMARY KEY (`idPlace`,`idRepresentation`,`idUtilisateur`),
+  ADD KEY `idUtilisateur` (`idUtilisateur`),
+  ADD KEY `idRepresentation` (`idRepresentation`);
 
 --
 -- Index pour la table `proj_Salle`
@@ -206,7 +215,8 @@ ALTER TABLE `proj_Types_Utilisateur`
 ALTER TABLE `proj_Utilisateur`
   ADD PRIMARY KEY (`idUtilisateur`),
   ADD UNIQUE KEY `uniq_courriel` (`adresseMail`),
-  ADD UNIQUE KEY `login` (`login`);
+  ADD UNIQUE KEY `login` (`login`),
+  ADD KEY `typeUtilisateur` (`typeUtilisateur`);
 
 --
 -- AUTO_INCREMENT pour les tables exportées
@@ -242,6 +252,51 @@ ALTER TABLE `proj_Spectacle`
 --
 ALTER TABLE `proj_Utilisateur`
   MODIFY `idUtilisateur` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- Contraintes pour les tables exportées
+--
+
+--
+-- Contraintes pour la table `proj_Categorie`
+--
+ALTER TABLE `proj_Categorie`
+  ADD CONSTRAINT `proj_Categorie_ibfk_1` FOREIGN KEY (`idSalle`) REFERENCES `proj_Salle` (`idSalle`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `proj_Categorie_ibfk_2` FOREIGN KEY (`idCategorie`) REFERENCES `proj_PrixPlace` (`idCategorie`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `proj_Place`
+--
+ALTER TABLE `proj_Place`
+  ADD CONSTRAINT `proj_Place_ibfk_1` FOREIGN KEY (`idSalle`) REFERENCES `proj_Salle` (`idSalle`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `proj_Place_ibfk_2` FOREIGN KEY (`Categorie`) REFERENCES `proj_Categorie` (`Categorie`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `proj_PrixPlace`
+--
+ALTER TABLE `proj_PrixPlace`
+  ADD CONSTRAINT `proj_PrixPlace_ibfk_1` FOREIGN KEY (`idSpectacle`) REFERENCES `proj_Spectacle` (`idSpectacle`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `proj_Representation`
+--
+ALTER TABLE `proj_Representation`
+  ADD CONSTRAINT `proj_Representation_ibfk_1` FOREIGN KEY (`idSalle`) REFERENCES `proj_Salle` (`idSalle`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `proj_Representation_ibfk_2` FOREIGN KEY (`idSpectacle`) REFERENCES `proj_Spectacle` (`idSpectacle`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `proj_Reservation`
+--
+ALTER TABLE `proj_Reservation`
+  ADD CONSTRAINT `proj_Reservation_ibfk_1` FOREIGN KEY (`idUtilisateur`) REFERENCES `proj_Utilisateur` (`idUtilisateur`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `proj_Reservation_ibfk_2` FOREIGN KEY (`idRepresentation`) REFERENCES `proj_Representation` (`idRepresentation`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `proj_Reservation_ibfk_3` FOREIGN KEY (`idPlace`) REFERENCES `proj_Place` (`idPlace`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `proj_Utilisateur`
+--
+ALTER TABLE `proj_Utilisateur`
+  ADD CONSTRAINT `proj_Utilisateur_ibfk_1` FOREIGN KEY (`typeUtilisateur`) REFERENCES `proj_Types_Utilisateur` (`TypeUtilisateur`) ON DELETE CASCADE ON UPDATE CASCADE;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
