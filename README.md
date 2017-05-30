@@ -1,8 +1,6 @@
 # Projet IHM
 
-Ce projet a pour objet le développement d'un site de réservation de place de spectacle.
-
-Il est réalisé dans le cadre du Master 1 MIASHS de l'Université Paris8.
+Ce projet est un projet dans le cadre du Master 1 MIASHS de l'Université Paris8.
 
 [http://www2.univ-paris8.fr/ingenierie-cognition/master-handi/](http://www2.univ-paris8.fr/ingenierie-cognition/master-handi/)
 
