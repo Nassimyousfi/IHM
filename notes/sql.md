@@ -35,6 +35,14 @@ Varchar 30, **UNIQUE**
 
 Il ne doit pas y avoir 2 login identiques dans la base
 
+
+### passHash
+
+Mot de passe haché par la fonction password_hash() de PHP; doit être utilisé
+directement par password_verify().
+
+varchar 255 NOT NULL
+
 ### nom
 
 Nom de l'utilisateur
