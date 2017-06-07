@@ -8,7 +8,7 @@ Toutes les tables commencent par le préfix "proj_"
 ## proj_TypeUtilisateur
 
 
-### Champ TypeUtilisateur
+### **TypeUtilisateur**
 
 Défini les types d'utilisateurs possibles:
 
@@ -23,7 +23,7 @@ varchar 10
 
 ## proj_Utilisateur
 
-### IDU
+### **IDU**
 Identifiant Unique utilisateur, **clé primaire**
 
 type numérique auto-incrémenté
@@ -87,7 +87,7 @@ correspondre à un certain format*
 
 varchar 15
 
-### typeUtilisateur
+### *typeUtilisateur*
 
 référence le type d'utilisateur
 
@@ -101,7 +101,7 @@ varchar 10
 
 Référence tous les spectacles proposés (faits, en cours, à venir)
 
-### idSpectacle
+### **idSpectacle**
 
 Identifiant unique auto-incrémenté, **clé primaire**
 
@@ -140,7 +140,7 @@ TEXT
 
 Une salle est composée de places et appartient à un lieu
 
-### idSalle
+### **idSalle**
 
 Identifiant unique
 
@@ -169,20 +169,20 @@ varchar 20
 Une représentation est identifiée par un spectacle (auteur, acteurs, etc), une salle,
 un horaire et une date. Un spectacle peut avoir plusieurs représentations dans la même salle.
 
-### idRepresentation
+### **idRepresentation**
 
 Identifiant unique
 
 Numérique INT auto-incrémenté **clé primaire**
 
 
-### idSalle
+### *idSalle*
 
 proj_Salle.idSalle, **clé étrangère**
 
 
 
-### idSpectacle
+### *idSpectacle*
 
 proj_Spectacle.idSpectacle, **clé étrangère**
 
@@ -208,7 +208,7 @@ TIME
 
 Catégories disponibles pour une salle
 
-### idCategorie
+### **idCategorie**
 
 Identifiant unique
 
@@ -220,7 +220,7 @@ Nom de la categorie
 
 varchar 20
 
-### idSalle
+### *idSalle*
 
 Les salles ont certaines catégories mais pas toutes. Il faut séparer les
 catégories de chaque salle, car la même catégorie n'aura pas le même prix dans un
@@ -229,20 +229,20 @@ théatre que dans un opéra.
 proj_Salle.idSalle, **clé étrangère**
 
 ## proj_Place
-### idPlace
+### **idPlace**
 
 Identifiant unique
 
 Numérique INT auto-incrémenté **clé primaire**
 
-### idSalle
+### *idSalle*
 
 Une place appartient toujours à une salle
 
 proj_Salle.idSalle, **clé étrangère**
 
 
-### idCategorie
+### *idCategorie*
 
 proj_Categorie.idCategorie, **clé étrangère**
 
@@ -251,11 +251,11 @@ proj_Categorie.idCategorie, **clé étrangère**
 Le prix est fonction du spectacle, peut importe la représentation, et de la catégorie.
 La catégorie permet de remonter à la salle.
 
-### idCategorie
+### ***idCategorie***
 
 proj_Categorie.idCategorie, **clé étrangère**; **clé primaire**
 
-### idSpectacle
+### ***idSpectacle***
 
 proj_Spectacle.idSpectacle, **clé étrangère**; **clé primaire**
 
@@ -273,19 +273,43 @@ par un unique utilisateur /client.
 Avec le couple idPlace et idRepresentation, il est possible de retrouver le prix
 
 
-### IDU
+### ***IDU***
 
 proj_Utilisateur.IDU, **clé étrangère**; **clé primaire**
 
-### idRepresentation
+### ***idRepresentation***
 proj_Representation.idRepresentation, **clé étrangère**; **clé primaire**
 
-### idPlace
+### ***idPlace***
 proj_Place.idPlace, **clé étrangère**; **clé primaire**
 
 # Disponibilité des places
 
 Pas besoin de créer une liste spéciale:
 
-Il suffit de trier les places pour le spectacle concerné où il y a (ou pas) de 
+Il suffit de trier les places pour le spectacle concerné où il y a (ou pas) de
 réservations de faite.
+
+# Clés étrangères
+
+proj_Utilisateur(typeUtilisateur) -> proj_TypeUtilisateur(typeUtilisateur)
+
+proj_Representation(idSalle) -> proj_Salle(idSalle)
+
+proj_Representation(idSpectacle) -> proj_Spectacle(idSpectacle)
+
+proj_Categorie(idSalle) -> proj_Salle(idSalle)
+
+proj_Place(idSalle) -> proj_Salle(idSalle)
+
+proj_Place(idCategorie) -> proj_Categorie(idCategorie)
+
+proj_PrixPlace(idCategorie) -> proj_Categorie(idCategorie)
+
+proj_PrixPlace(idSpectacle) -> proj_Spectacle(idSpectacle)
+
+proj_Reservation(IDU) -> proj_Utilisateur(IDU)
+
+proj_Reservation(idRepresentation) -> proj_Representation(idRepresentation)
+
+proj_Reservation(idPlace) -> proj_Place(idPlace)
