@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Mar 30 Mai 2017 à 17:22
+-- Généré le :  Mer 31 Mai 2017 à 21:08
 -- Version du serveur :  10.1.19-MariaDB
 -- Version de PHP :  5.6.24
 
@@ -137,6 +137,7 @@ INSERT INTO `proj_Types_Utilisateur` (`TypeUtilisateur`) VALUES
 CREATE TABLE `proj_Utilisateur` (
   `idUtilisateur` int(11) NOT NULL,
   `login` varchar(30) COLLATE utf8_roman_ci NOT NULL,
+  `passHash` varchar(255) COLLATE utf8_roman_ci NOT NULL,
   `nom` varchar(30) COLLATE utf8_roman_ci NOT NULL,
   `prenom` varchar(30) COLLATE utf8_roman_ci NOT NULL,
   `adressePostale1` varchar(50) COLLATE utf8_roman_ci NOT NULL,
