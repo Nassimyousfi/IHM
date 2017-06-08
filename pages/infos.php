@@ -10,6 +10,7 @@ $path_images=$path_root."images/";
 <?php include($path_structure."head.php"); ?>	<!-- Inclusion <head> -->
 <body class="w-100 h-100">
 	<?php include($path_structure."menu.php"); ?>	<!-- Inclusion menu -->
+	<div id="map"></div> <!-- div utilisée pour positionner la carte créée par la fonction JavaScript initMap -->
 	<?php include($path_structure."pied.php"); ?>	<!-- Inclusion pied de page -->
 	<?php include($path_structure."liensJS.php"); ?>	<!-- Inclusion CDN et fichiers javascript -->
 </body>
