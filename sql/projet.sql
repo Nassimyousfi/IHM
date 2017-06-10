@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Sam 10 Juin 2017 à 12:27
+-- Généré le :  Sam 10 Juin 2017 à 20:42
 -- Version du serveur :  10.1.19-MariaDB
 -- Version de PHP :  5.6.24
 
@@ -32,6 +32,20 @@ CREATE TABLE `proj_Categorie` (
   `idSalle` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_roman_ci;
 
+--
+-- Contenu de la table `proj_Categorie`
+--
+
+INSERT INTO `proj_Categorie` (`idCategorie`, `Categorie`, `idSalle`) VALUES
+(4, 'Parterre', 2),
+(5, 'Orchestre', 2),
+(6, 'Balcon', 2),
+(7, 'Loges', 2),
+(8, 'Balcon', 3),
+(9, 'Loges', 3),
+(10, 'Parterre', 3),
+(11, 'Orchestre', 3);
+
 -- --------------------------------------------------------
 
 --
@@ -56,6 +70,28 @@ CREATE TABLE `proj_PrixPlace` (
   `Prix` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_roman_ci;
 
+--
+-- Contenu de la table `proj_PrixPlace`
+--
+
+INSERT INTO `proj_PrixPlace` (`idCategorie`, `idSpectacle`, `Prix`) VALUES
+(4, 2, '125.00'),
+(4, 3, '125.00'),
+(5, 2, '135.00'),
+(5, 3, '135.00'),
+(6, 2, '100.00'),
+(6, 3, '100.00'),
+(7, 2, '90.00'),
+(7, 3, '90.00'),
+(8, 4, '100.00'),
+(8, 5, '130.00'),
+(9, 4, '130.00'),
+(9, 5, '150.00'),
+(10, 4, '180.00'),
+(10, 5, '210.00'),
+(11, 4, '160.00'),
+(11, 5, '170.00');
+
 -- --------------------------------------------------------
 
 --
@@ -70,6 +106,18 @@ CREATE TABLE `proj_Representation` (
   `horaireDebut` time NOT NULL,
   `horaireFin` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_roman_ci;
+
+--
+-- Contenu de la table `proj_Representation`
+--
+
+INSERT INTO `proj_Representation` (`idRepresentation`, `idSalle`, `idSpectacle`, `date`, `horaireDebut`, `horaireFin`) VALUES
+(1, 2, 2, '2017-04-07', '19:00:00', '23:00:00'),
+(2, 2, 2, '2017-05-05', '19:00:00', '23:00:00'),
+(3, 2, 3, '2017-05-13', '20:00:00', '23:30:00'),
+(4, 2, 3, '2017-06-10', '20:00:00', '23:30:00'),
+(5, 3, 4, '2017-06-02', '20:00:00', '00:00:00'),
+(6, 3, 5, '2017-07-01', '20:00:00', '00:00:00');
 
 -- --------------------------------------------------------
 
@@ -260,7 +308,7 @@ ALTER TABLE `proj_Utilisateur`
 -- AUTO_INCREMENT pour la table `proj_Categorie`
 --
 ALTER TABLE `proj_Categorie`
-  MODIFY `idCategorie` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idCategorie` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT pour la table `proj_Place`
 --
@@ -270,7 +318,7 @@ ALTER TABLE `proj_Place`
 -- AUTO_INCREMENT pour la table `proj_Representation`
 --
 ALTER TABLE `proj_Representation`
-  MODIFY `idRepresentation` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idRepresentation` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT pour la table `proj_Salle`
 --
@@ -294,8 +342,7 @@ ALTER TABLE `proj_Utilisateur`
 -- Contraintes pour la table `proj_Categorie`
 --
 ALTER TABLE `proj_Categorie`
-  ADD CONSTRAINT `proj_Categorie_ibfk_1` FOREIGN KEY (`idSalle`) REFERENCES `proj_Salle` (`idSalle`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `proj_Categorie_ibfk_2` FOREIGN KEY (`idCategorie`) REFERENCES `proj_PrixPlace` (`idCategorie`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `proj_Categorie_ibfk_1` FOREIGN KEY (`idSalle`) REFERENCES `proj_Salle` (`idSalle`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `proj_Place`
@@ -308,7 +355,8 @@ ALTER TABLE `proj_Place`
 -- Contraintes pour la table `proj_PrixPlace`
 --
 ALTER TABLE `proj_PrixPlace`
-  ADD CONSTRAINT `proj_PrixPlace_ibfk_1` FOREIGN KEY (`idSpectacle`) REFERENCES `proj_Spectacle` (`idSpectacle`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `proj_PrixPlace_ibfk_1` FOREIGN KEY (`idSpectacle`) REFERENCES `proj_Spectacle` (`idSpectacle`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `proj_PrixPlace_ibfk_2` FOREIGN KEY (`idCategorie`) REFERENCES `proj_Categorie` (`idCategorie`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `proj_Representation`
