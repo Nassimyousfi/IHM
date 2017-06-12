@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Sam 10 Juin 2017 à 21:14
+-- Généré le :  Lun 12 Juin 2017 à 16:11
 -- Version du serveur :  10.1.19-MariaDB
 -- Version de PHP :  5.6.24
 
@@ -200,35 +200,37 @@ INSERT INTO `proj_Types_Utilisateur` (`TypeUtilisateur`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `proj_Utilisateur`
+-- Structure de la table `proj_utilisateur`
 --
 
-CREATE TABLE `proj_Utilisateur` (
+CREATE TABLE `proj_utilisateur` (
   `idUtilisateur` int(11) NOT NULL,
-  `login` varchar(30) COLLATE utf8_roman_ci NOT NULL,
+  `login` varchar(60) COLLATE utf8_roman_ci NOT NULL,
   `passHash` varchar(255) COLLATE utf8_roman_ci NOT NULL,
-  `nom` varchar(30) COLLATE utf8_roman_ci NOT NULL,
-  `prenom` varchar(30) COLLATE utf8_roman_ci NOT NULL,
-  `adressePostale1` varchar(50) COLLATE utf8_roman_ci NOT NULL,
-  `adressePostale2` varchar(50) COLLATE utf8_roman_ci NOT NULL,
-  `codePostal` varchar(10) COLLATE utf8_roman_ci NOT NULL,
-  `ville` varchar(50) COLLATE utf8_roman_ci NOT NULL,
-  `adresseMail` varchar(50) COLLATE utf8_roman_ci NOT NULL,
-  `telephone` varchar(15) COLLATE utf8_roman_ci NOT NULL,
-  `typeUtilisateur` varchar(10) COLLATE utf8_roman_ci NOT NULL DEFAULT 'user'
+  `nom` varchar(30) COLLATE utf8_roman_ci DEFAULT NULL,
+  `prenom` varchar(30) COLLATE utf8_roman_ci DEFAULT NULL,
+  `adressePostale1` varchar(50) COLLATE utf8_roman_ci DEFAULT NULL,
+  `adressePostale2` varchar(50) COLLATE utf8_roman_ci DEFAULT NULL,
+  `codePostal` varchar(10) COLLATE utf8_roman_ci DEFAULT NULL,
+  `ville` varchar(50) COLLATE utf8_roman_ci DEFAULT NULL,
+  `adresseMail` varchar(255) COLLATE utf8_roman_ci NOT NULL,
+  `telephone` varchar(15) COLLATE utf8_roman_ci DEFAULT NULL,
+  `typeUtilisateur` varchar(10) COLLATE utf8_roman_ci NOT NULL DEFAULT 'user',
+  `code_confirmation` varchar(60) COLLATE utf8_roman_ci DEFAULT NULL,
+  `date_confirmation` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_roman_ci;
 
 --
--- Contenu de la table `proj_Utilisateur`
+-- Contenu de la table `proj_utilisateur`
 --
 
-INSERT INTO `proj_Utilisateur` (`idUtilisateur`, `login`, `passHash`, `nom`, `prenom`, `adressePostale1`, `adressePostale2`, `codePostal`, `ville`, `adresseMail`, `telephone`, `typeUtilisateur`) VALUES
-(1, 'niko', '$2y$10$zsvTwVw.4WKjqIUvBZWXE.ySB7jb5DrhLsRqAyDkGjVnRLFGfuG2m', 'Niko', 'Nicolas', 'Université Paris8', '2 rue de la Liberté', '93526', 'Saint-Denis cedex ', 'youpitralala126@yopmail.com', '001122334455', 'admin'),
-(2, 'Pinpin', '$2y$10$bmJ/sE7oo4h6GUAzuNdol.eklYPtCrRG16iyw1VF8dpAwIQi220ly', 'Pinpin', 'Lelapin', '12 allées des carottes', '', '73200', 'Lapinville', 'lapin@mail.animaux.com', '0123456789', 'user'),
-(3, 'toto', '$2y$10$83SfoF4Mlq8.MnhYA2db8eKvpiue4IWuMjvA3ux0xOxkbVNsphC3K', 'to', 'to', 'néant', 'néant', '75000', 'Paris', 'toto@mail.bidon', '0123456789', 'user'),
-(4, 'charles', '$2y$10$Fc9/d/CD0s/43Iai5ar0JuB/tD0cSIXetwksWofAK6H8fTSfNWFnm', 'Carlito', 'Charles', 'Université Paris 8', '2 rue de la liberté', '93300', 'Saint Denis', 'mail.bidon@mail.bidon', '012346789', 'admin'),
-(5, 'bilo', '$2y$10$ThHbq38jbz6KYWNH6cPQwuvY84xHipAmoR1Vj9MeH6CBj6XetZRqG', 'Bilo', 'Bilo', 'Université Paris 8', '2 rue de la Liberté', '93300', 'Saint Denis', 'mail.bidon2@mail.bidon', '9876543210', 'admin'),
-(6, 'nassim', '$2y$10$nNVq8jN7b25qUz91KDXQbeEXZOhGyiyQ5VfLYqsPlNzX6SQebSWn6', 'Nassim', 'Nassim', 'Université Paris8', '2 rue de la liberté', '93300', 'Saint Denis', 'mail.bidon3@mail.bidon', '365484255475', 'admin');
+INSERT INTO `proj_utilisateur` (`idUtilisateur`, `login`, `passHash`, `nom`, `prenom`, `adressePostale1`, `adressePostale2`, `codePostal`, `ville`, `adresseMail`, `telephone`, `typeUtilisateur`, `code_confirmation`, `date_confirmation`) VALUES
+(1, 'niko', '$2y$10$zsvTwVw.4WKjqIUvBZWXE.ySB7jb5DrhLsRqAyDkGjVnRLFGfuG2m', 'Niko', 'Nicolas', 'Université Paris8', '2 rue de la Liberté', '93526', 'Saint-Denis cedex ', 'youpitralala126@yopmail.com', '001122334455', 'admin', NULL, NULL),
+(2, 'Pinpin', '$2y$10$bmJ/sE7oo4h6GUAzuNdol.eklYPtCrRG16iyw1VF8dpAwIQi220ly', 'Pinpin', 'Lelapin', '12 allées des carottes', '', '73200', 'Lapinville', 'lapin@mail.animaux.com', '0123456789', 'user', NULL, NULL),
+(3, 'toto', '$2y$10$83SfoF4Mlq8.MnhYA2db8eKvpiue4IWuMjvA3ux0xOxkbVNsphC3K', 'to', 'to', 'néant', 'néant', '75000', 'Paris', 'toto@mail.bidon', '0123456789', 'user', NULL, NULL),
+(4, 'charles', '$2y$10$Fc9/d/CD0s/43Iai5ar0JuB/tD0cSIXetwksWofAK6H8fTSfNWFnm', 'Carlito', 'Charles', 'Université Paris 8', '2 rue de la liberté', '93300', 'Saint Denis', 'mail.bidon@mail.bidon', '012346789', 'admin', NULL, NULL),
+(5, 'bilo', '$2y$10$ThHbq38jbz6KYWNH6cPQwuvY84xHipAmoR1Vj9MeH6CBj6XetZRqG', 'Bilo', 'Bilo', 'Université Paris 8', '2 rue de la Liberté', '93300', 'Saint Denis', 'mail.bidon2@mail.bidon', '9876543210', 'admin', NULL, NULL),
+(6, 'nassim', '$2y$10$nNVq8jN7b25qUz91KDXQbeEXZOhGyiyQ5VfLYqsPlNzX6SQebSWn6', 'Nassim', 'Nassim', 'Université Paris8', '2 rue de la liberté', '93300', 'Saint Denis', 'mail.bidon3@mail.bidon', '365484255475', 'admin', NULL, NULL);
 
 --
 -- Index pour les tables exportées
@@ -292,9 +294,9 @@ ALTER TABLE `proj_Types_Utilisateur`
   ADD PRIMARY KEY (`TypeUtilisateur`);
 
 --
--- Index pour la table `proj_Utilisateur`
+-- Index pour la table `proj_utilisateur`
 --
-ALTER TABLE `proj_Utilisateur`
+ALTER TABLE `proj_utilisateur`
   ADD PRIMARY KEY (`idUtilisateur`),
   ADD UNIQUE KEY `uniq_courriel` (`adresseMail`),
   ADD UNIQUE KEY `login` (`login`),
@@ -330,10 +332,10 @@ ALTER TABLE `proj_Salle`
 ALTER TABLE `proj_Spectacle`
   MODIFY `idSpectacle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
--- AUTO_INCREMENT pour la table `proj_Utilisateur`
+-- AUTO_INCREMENT pour la table `proj_utilisateur`
 --
-ALTER TABLE `proj_Utilisateur`
-  MODIFY `idUtilisateur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+ALTER TABLE `proj_utilisateur`
+  MODIFY `idUtilisateur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- Contraintes pour les tables exportées
 --
@@ -369,15 +371,15 @@ ALTER TABLE `proj_Representation`
 -- Contraintes pour la table `proj_Reservation`
 --
 ALTER TABLE `proj_Reservation`
-  ADD CONSTRAINT `proj_Reservation_ibfk_1` FOREIGN KEY (`idUtilisateur`) REFERENCES `proj_Utilisateur` (`idUtilisateur`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `proj_Reservation_ibfk_1` FOREIGN KEY (`idUtilisateur`) REFERENCES `proj_utilisateur` (`idUtilisateur`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `proj_Reservation_ibfk_2` FOREIGN KEY (`idRepresentation`) REFERENCES `proj_Representation` (`idRepresentation`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `proj_Reservation_ibfk_3` FOREIGN KEY (`idPlace`) REFERENCES `proj_Place` (`idPlace`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `proj_Utilisateur`
+-- Contraintes pour la table `proj_utilisateur`
 --
-ALTER TABLE `proj_Utilisateur`
-  ADD CONSTRAINT `proj_Utilisateur_ibfk_1` FOREIGN KEY (`typeUtilisateur`) REFERENCES `proj_Types_Utilisateur` (`TypeUtilisateur`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `proj_utilisateur`
+  ADD CONSTRAINT `proj_utilisateur_ibfk_1` FOREIGN KEY (`typeUtilisateur`) REFERENCES `proj_Types_Utilisateur` (`TypeUtilisateur`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
