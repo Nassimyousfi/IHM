@@ -2,7 +2,7 @@
 <a id="retourHaut" href="#">Retour en haut de page</a>
 </div>
 <div class="py-3" id="pied">
-  <div class="container d-flex flex-row justify-content-around" >
+  <div class="container d-flex flex-row justify-content-around">
     <div class="d-flex flex-column justify-content-center">
       <span class="m-auto pb-2 font-weight-bold">Nous suivre</span>
       <div class="d-flex flex-row" id="socialIcon">

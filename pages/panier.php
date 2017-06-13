@@ -14,6 +14,7 @@ $path_images=$path_root."images/";
 	<?php include($path_structure."menu.php"); ?>	<!-- Inclusion menu -->
 
 	<!-- Contenu de la page panier -->
+	
 	<div class="container" id="main">
 		<h1>Mon panier</h1>
 		<p></p>

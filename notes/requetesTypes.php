@@ -45,4 +45,22 @@ $sql = "INSERT INTO
           \'Rue du Théatre \n". "84000 AVIGNON\',
           \'Théatre\')";
 
+  // rechercher une représentation dans une salle après une date donnée
+  $sql = "SELECT * \n"
+    . "from proj_Representation as r \n"
+    . "JOIN proj_Spectacle as spe ON (spe.idSpectacle = r.idSpectacle) \n"
+    . "JOIN proj_Salle as sa ON (sa.idSalle = r.idSalle)\n"
+    . "\n"
+    . "where r.date > 20170601 and sa.nom=\"Opéra Bastille\"";
+
+    // Rechercher les places à moins de 120 euros des spectacles ayant lieu à l'opéra bastille après le 01/06/2017
+
+    $sql = "SELECT distinct(cat.Categorie),spe.nom, r.date, prix.Prix\n"
+    . "from proj_Representation as r \n"
+    . "JOIN proj_Spectacle as spe ON (spe.idSpectacle = r.idSpectacle) \n"
+    . "JOIN proj_Salle as sa ON (sa.idSalle = r.idSalle)\n"
+    . "JOIN proj_Categorie as cat ON (cat.idSalle = sa.idSalle)\n"
+    . "JOIN proj_PrixPlace as prix ON (prix.idCategorie = cat.idCategorie)\n"
+    . "where r.date > 20170601 and sa.nom=\"Opéra Bastille\" and prix.Prix < 120";
+
  ?>

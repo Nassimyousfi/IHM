@@ -19,10 +19,9 @@ $path_images=$path_root."images/";
 <html lang="fr" class="">
 <?php include($path_structure."head.php"); ?> <!-- Inclusion <head> -->
 <body class="">
-  <?php include($path_structure."menu.php"); ?> <!-- Inclusion menu -->
+	<?php include($path_structure."menu.php"); ?> <!-- Inclusion menu -->
 
-  <!-- Contenu de la page de connexion -->
-
+	<!-- Contenu de la page de connexion -->
   <div class="container" id="main">
     <div class="card m-auto">
       <div class="card-block text-center">
@@ -51,5 +50,6 @@ $path_images=$path_root."images/";
   </div>
   <?php include($path_structure."footer.php"); ?> <!-- Inclusion pied de page -->
   <?php include($path_structure."JS.php"); ?>  <!-- Inclusion CDN et fichiers javascript -->
+
 </body>
 </html>
