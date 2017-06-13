@@ -13,7 +13,6 @@ $path_images=$path_root."images/";
 
 	<!-- Contenu de la page de programmation -->
 
-
 	<div class="container" id="main">
 		<!-- Critères de Recherche -->
 		<div class="card mx-auto">

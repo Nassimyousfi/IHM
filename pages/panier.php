@@ -12,6 +12,7 @@ $path_images=$path_root."images/";
 	<?php include($path_structure."menu.php"); ?>	<!-- Inclusion menu -->
 
 	<!-- Contenu de la page panier -->
+	
 	<div class="container" id="main">
 		<div class="card mx-auto">
 			<div class="card-block text-center">
